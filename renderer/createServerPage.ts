@@ -12,7 +12,13 @@ interface CreatePageServerOptions {
 // Creates a factory function that can be re-used across multiple renderers
 export const createServerPage = (options: CreatePageServerOptions) =>
   async function render(pageContext: PageContextBuiltIn & PageContext) {
-    const app = createAppWithLayout(pageContext, options.layout);
+    let layout = options.layout;
+    // Use a pages exported layout if there is one
+    if (pageContext.Page.layout) {
+      layout = pageContext.Page.layout;
+    }
+
+    const app = createAppWithLayout(pageContext, layout);
     const appHtml = await renderToString(app);
 
     // See https://vite-plugin-ssr.com/html-head

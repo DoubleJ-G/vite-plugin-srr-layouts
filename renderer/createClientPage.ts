@@ -13,6 +13,13 @@ export const createClientPage = (options: CreatePageClientOptions) =>
     // We do Server Routing, but we can also do Client Routing by using `useClientRouter()`
     // instead of `getPage()`, see https://vite-plugin-ssr.com/useClientRouter
     const pageContext = await getPage<PageContextBuiltInClient & PageContext>();
-    const app = createAppWithLayout(pageContext, options.layout);
+
+    // Use a pages exported layout if there is one
+    let layout = options.layout;
+    if (pageContext.Page.layout) {
+      layout = pageContext.Page.layout;
+    }
+
+    const app = createAppWithLayout(pageContext, layout);
     app.mount('#app');
   };
