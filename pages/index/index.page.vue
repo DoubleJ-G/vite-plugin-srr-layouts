@@ -9,7 +9,7 @@
         <a href="/blue">Go to BlueLayout</a>
       </li>
       <li>
-        <a href="/green">Go to GreenLayout</a>
+        <a href="/blue/green">Go to GreenLayout</a>
       </li>
     </ul>
   </div>
